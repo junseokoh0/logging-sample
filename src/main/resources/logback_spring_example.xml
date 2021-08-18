@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+        <region>ap-northeast-2</region>
+        <logGroup>/api/develop</logGroup>
+        <logStream>dev-api-%date{yyyyMMdd,UTC}</logStream>
+        <accessKeyId>AKIAI2FJZ5SW47RXN5XA</accessKeyId>
+        <secretKey>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</secretKey>
+        <maxBatchSize>10</maxBatchSize>
+        <maxBatchTimeMillis>1000</maxBatchTimeMillis>
+        <layout>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="AUDIT-CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+        <region>ap-northeast-2</region>
+        <logGroup>/audit/develop</logGroup>
+        <logStream>dev-audit-%date{yyyyMMdd,UTC}</logStream>
+        <accessKeyId>AKIAI2FJZ5SW47RXN5XA</accessKeyId>
+        <secretKey>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</secretKey>
+        <maxBatchSize>10</maxBatchSize>
+        <maxBatchTimeMillis>1000</maxBatchTimeMillis>
+        <layout>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME}/example-api.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_PATH_NAME}/example-api.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.example.api.common.auditlog" level="DEBUG">
+        <appender-ref ref="AUDIT-CLOUDWATCH"/>
+    </logger>
+
+    <logger name="jdbc" level="OFF"/>
+
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.sqltiming" level="DEBUG"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+
+    <logger name="com.example.api" level="DEBUG"/>
+    <logger name="com.amazonaws.util.EC2MetadataUtils" level="ERROR"/>
+
+    <root level="INFO">
+        <appender-ref ref="LOG_FILE"/>
+        <appender-ref ref="CLOUDWATCH"/>
+    </root>
+</configuration>
