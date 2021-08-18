@@ -22,10 +22,34 @@ public class LoggingController {
 
     private final AuditLogger logger;
 
-    @GetMapping("/{message}")
-    public String message(@PathVariable String message) {
+    @GetMapping("/debug/{message}")
+    public String debug(@PathVariable String message) {
 
-        logger.log(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
+        logger.debug(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
+                .topMenuName("상위메뉴")
+                .subMenuName("서브메뉴")
+                .preData(message)
+                .message("message 전송중 로그를 한번 찍어 봤습니다..!")
+                .build());
+        return message;
+    }
+
+    @GetMapping("/info/{message}")
+    public String info(@PathVariable String message) {
+
+        logger.info(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
+                .topMenuName("상위메뉴")
+                .subMenuName("서브메뉴")
+                .preData(message)
+                .message("message 전송중 로그를 한번 찍어 봤습니다..!")
+                .build());
+        return message;
+    }
+
+    @GetMapping("/error/{message}")
+    public String error(@PathVariable String message) {
+
+        logger.info(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)
