@@ -4,9 +4,7 @@ import lombok.*;
 
 @EqualsAndHashCode
 @Getter @Setter
-public class AuditLoggerVO {
-    private String uid;
-    private final String ip;
+public class AuditItem {
     private final String className;
     private final String topMenuName;
     private final String subMenuName;
@@ -14,12 +12,11 @@ public class AuditLoggerVO {
     private final Object postData;
     private final String message;
 
-    public static AuditLoggerBuilder builder(String ip, String className) {
-        return new AuditLoggerBuilder(ip, className);
+    public static AuditLoggerBuilder builder(String className) {
+        return new AuditLoggerBuilder(className);
     }
 
-    public AuditLoggerVO(String ip, String className, String topMenuName, String subMenuName, Object preData, Object postData, String message) {
-        this.ip = ip;
+    public AuditItem(String className, String topMenuName, String subMenuName, Object preData, Object postData, String message) {
         this.className = className;
         this.topMenuName = topMenuName;
         this.subMenuName = subMenuName;
@@ -29,7 +26,6 @@ public class AuditLoggerVO {
     }
 
     public static class AuditLoggerBuilder {
-        private String ip;
         private String className;
         private String topMenuName;
         private String subMenuName;
@@ -37,8 +33,7 @@ public class AuditLoggerVO {
         private Object postData;
         private String message;
 
-        public AuditLoggerBuilder(String ip, String className) {
-            this.ip = ip;
+        public AuditLoggerBuilder(String className) {
             this.className = className;
         }
 
@@ -67,8 +62,8 @@ public class AuditLoggerVO {
             return this;
         }
 
-        public AuditLoggerVO build() {
-            return new AuditLoggerVO(this.ip, this.className, this.topMenuName, this.subMenuName, this.preData, this.postData, this.message);
+        public AuditItem build() {
+            return new AuditItem(this.className, this.topMenuName, this.subMenuName, this.preData, this.postData, this.message);
         }
     }
 }

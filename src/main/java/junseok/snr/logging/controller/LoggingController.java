@@ -2,7 +2,7 @@ package junseok.snr.logging.controller;
 
 import io.micrometer.core.instrument.util.StringUtils;
 import junseok.snr.logging.commons.audit.AuditLogger;
-import junseok.snr.logging.commons.audit.AuditLoggerVO;
+import junseok.snr.logging.commons.audit.AuditItem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,10 +25,9 @@ public class LoggingController {
     @GetMapping("/debug/{message}")
     public String debug(@PathVariable String message) {
 
-        logger.debug(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
-                .topMenuName("상위메뉴")
-                .subMenuName("서브메뉴")
+        logger.debug(AuditItem.builder(LoggingController.class.getSimpleName())
                 .preData(message)
+                .postData(String.format("post-%s", message))
                 .message("message 전송중 로그를 한번 찍어 봤습니다..!")
                 .build());
         return message;
@@ -37,7 +36,7 @@ public class LoggingController {
     @GetMapping("/info/{message}")
     public String info(@PathVariable String message) {
 
-        logger.info(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
+        logger.info(AuditItem.builder(LoggingController.class.getSimpleName())
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)
@@ -49,7 +48,7 @@ public class LoggingController {
     @GetMapping("/error/{message}")
     public String error(@PathVariable String message) {
 
-        logger.error(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
+        logger.error(AuditItem.builder(LoggingController.class.getSimpleName())
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)

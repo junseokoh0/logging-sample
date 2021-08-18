@@ -2,17 +2,15 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern>
         </encoder>
-    </appender>
-    <appender name="map" class="junseok.snr.logging.configs.MapAppender">
     </appender>
 
     <logger name="junseok.snr.logging" level="debug">
-        <appender-ref ref="map" />
+        <appender-ref ref="STDOUT" />
     </logger>
 
-    <root level="info">
+    <root level="error">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
