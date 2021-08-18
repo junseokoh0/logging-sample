@@ -49,7 +49,7 @@ public class LoggingController {
     @GetMapping("/error/{message}")
     public String error(@PathVariable String message) {
 
-        logger.info(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
+        logger.error(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)

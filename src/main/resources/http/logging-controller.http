@@ -1,0 +1,11 @@
+###
+GET http://localhost:80/logging/debug/asdfasdfaewfa
+
+
+###
+GET http://localhost:80/logging/info/asdfasvasdva
+
+
+###
+GET http://localhost:80/logging/error/awefasdvaeasv
+
