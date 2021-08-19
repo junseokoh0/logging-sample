@@ -47,10 +47,6 @@
             <artifactId>janino</artifactId>
             <version>3.0.8</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.amazonaws</groupId>-->
-<!--            <artifactId>aws-java-sdk-bom</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.j256.cloudwatchlogbackappender</groupId>
             <artifactId>cloudwatchlogbackappender</artifactId>
@@ -58,7 +54,7 @@
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-ec2</artifactId>
+            <artifactId>aws-java-sdk-s3</artifactId>
             <version>1.11.848</version>
         </dependency>
         <dependency>
@@ -66,11 +62,6 @@
             <artifactId>aws-java-sdk-secretsmanager</artifactId>
             <version>1.11.848</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.amazonaws</groupId>-->
-<!--            <artifactId>aws-java-sdk-core</artifactId>-->
-<!--            <version>1.11.848</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
