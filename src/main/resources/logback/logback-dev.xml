@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
+        <region>ap-northeast-2</region>
+        <logGroup>/aws/ec2/instance/dev-crm</logGroup>
+        <logStream>dev-crm-%-5level-%date{yyyyMMdd,UTC}</logStream>
+        <accessKeyId>${accessKeyId}</accessKeyId>
+        <secretKey>${secretKey}</secretKey>
+        <maxBatchSize>10</maxBatchSize>
+        <maxBatchTimeMillis>1000</maxBatchTimeMillis>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %-5level %logger{35} - %message%n</pattern>
+        </layout>
+    </appender>
+
+<!--    <logger name="com.amazonaws.util.EC2MetadataUtils" level="error"/>-->
+<!--    <logger name="com.amazonaws.internal.InstanceMetadataServiceResourceFetcher" level="error"/>-->
+
+    <logger name="jdbc" level="OFF"/>
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.sqltiming" level="DEBUG"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+
+    <logger name="junseok.snr.logging" level="debug"/>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="CLOUDWATCH" />
+    </root>
+</included>

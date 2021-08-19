@@ -46,14 +46,12 @@ public class AuditProductLogger implements AuditLogger {
     public void error(AuditItem auditItem) {
         try {
             log.error(objectMapper.writeValueAsString(auditItem));
-            objectMapper.writeValueAsString(auditItem.getClass());
         } catch (JsonProcessingException exception) {
             handleException(exception);
         }
     }
 
     private void handleException(JsonProcessingException exception) {
-        exception.printStackTrace();
         log.error("AuditLogger JsonProcessingException", exception);
     }
 }

@@ -42,6 +42,11 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.0.8</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.amazonaws</groupId>-->
 <!--            <artifactId>aws-java-sdk-bom</artifactId>-->
@@ -53,27 +58,32 @@
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-logs</artifactId>
-            <version>1.11.914</version>
+            <artifactId>aws-java-sdk-ec2</artifactId>
+            <version>1.11.848</version>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-ec2</artifactId>
-            <version>1.11.914</version>
+            <artifactId>aws-java-sdk-secretsmanager</artifactId>
+            <version>1.11.848</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>aws-java-sdk-core</artifactId>-->
+<!--            <version>1.11.848</version>-->
+<!--        </dependency>-->
     </dependencies>
 
-<!--    <dependencyManagement>-->
-<!--        <dependencies>-->
-<!--            <dependency>-->
-<!--                <groupId>com.amazonaws</groupId>-->
-<!--                <artifactId>aws-java-sdk-bom</artifactId>-->
-<!--                <version>1.12.47</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
-<!--        </dependencies>-->
-<!--    </dependencyManagement>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-bom</artifactId>
+                <version>1.11.848</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
     <build>

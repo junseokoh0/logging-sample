@@ -1,45 +1,20 @@
-<configuration debug="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!--	<contextListener class="junseok.snr.logging.commons.audit.AuditListener"/>-->
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
-        <region>ap-northeast-2</region>
-        <logGroup>/api/develop</logGroup>
-        <logStream>dev-api-%date{yyyyMMdd,UTC}</logStream>
-        <accessKeyId>AKIAWDLYCJD5MD2CWVOP</accessKeyId>
-        <secretKey>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</secretKey>
-        <maxBatchSize>10</maxBatchSize>
-        <maxBatchTimeMillis>1000</maxBatchTimeMillis>
-        <layout>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </layout>
-    </appender>
-
-    <appender name="AUDIT-CLOUDWATCH" class="com.j256.cloudwatchlogbackappender.CloudWatchAppender">
-        <region>ap-northeast-2</region>
-        <logGroup>/audit/develop</logGroup>
-        <logStream>dev-audit-%date{yyyyMMdd,UTC}</logStream>
-        <accessKeyId>AKIAWDLYCJD5MD2CWVOP</accessKeyId>
-        <secretKey>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</secretKey>
-        <maxBatchSize>10</maxBatchSize>
-        <maxBatchTimeMillis>1000</maxBatchTimeMillis>
-        <layout>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </layout>
-    </appender>
-
-    <appender name="map" class="junseok.snr.logging.configs.MapAppender">
-    </appender>
-
-    <logger name="junseok.snr.logging" level="debug">
-        <appender-ref ref="STDOUT" />
-    </logger>
-
-    <root level="error">
-        <appender-ref ref="STDOUT" />
-    </root>
+	<if condition='p("spring.profiles.active").contains("prod")'>
+		<then>
+			<include resource="logback/logback-prod.xml"/>
+		</then>
+		<else>
+			<if condition='p("spring.profiles.active").contains("test")'>
+				<then>
+					<include resource="logback/logback-test.xml"/>
+				</then>
+				<else>
+					<include resource="logback/logback-dev.xml"/>
+				</else>
+			</if>
+		</else>
+	</if>
 </configuration>

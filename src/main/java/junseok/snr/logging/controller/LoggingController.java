@@ -4,7 +4,6 @@ import io.micrometer.core.instrument.util.StringUtils;
 import junseok.snr.logging.commons.audit.AuditLogger;
 import junseok.snr.logging.commons.audit.AuditItem;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/logging")
-@Slf4j
 @RequiredArgsConstructor
 public class LoggingController {
 
@@ -28,7 +26,7 @@ public class LoggingController {
         logger.debug(AuditItem.builder(LoggingController.class.getSimpleName())
                 .preData(message)
                 .postData(String.format("post-%s", message))
-                .message("message 전송중 로그를 한번 찍어 봤습니다..!")
+                .message("message 전송중 디버그 로깅!!!")
                 .build());
         return message;
     }
@@ -40,7 +38,7 @@ public class LoggingController {
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)
-                .message("message 전송중 로그를 한번 찍어 봤습니다..!")
+                .message("message 전송중 인포 로깅!!")
                 .build());
         return message;
     }
@@ -52,7 +50,7 @@ public class LoggingController {
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)
-                .message("message 전송중 로그를 한번 찍어 봤습니다..!")
+                .message("message 전송중 에러 로깅!!")
                 .build());
         return message;
     }
