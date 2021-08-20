@@ -25,12 +25,11 @@ public class LoggingController {
     @GetMapping("/{message}")
     public String message(@PathVariable String message) {
 
-        logger.log(AuditLoggerVO.builder()
-                .ip(getClientIP())
-                .className(LoggingController.class.getSimpleName())
+        logger.log(AuditLoggerVO.builder(getClientIP(), LoggingController.class.getSimpleName())
                 .topMenuName("상위메뉴")
                 .subMenuName("서브메뉴")
                 .preData(message)
+                .message("message 전송중 로그를 한번 찍어 봤습니다..!")
                 .build());
         return message;
     }

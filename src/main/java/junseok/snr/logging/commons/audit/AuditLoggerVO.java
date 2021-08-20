@@ -14,8 +14,8 @@ public class AuditLoggerVO {
     private final Object postData;
     private final String message;
 
-    public static AuditLoggerBuilder builder() {
-        return new AuditLoggerBuilder();
+    public static AuditLoggerBuilder builder(String ip, String className) {
+        return new AuditLoggerBuilder(ip, className);
     }
 
     public AuditLoggerVO(String ip, String className, String topMenuName, String subMenuName, Object preData, Object postData, String message) {
@@ -37,14 +37,9 @@ public class AuditLoggerVO {
         private Object postData;
         private String message;
 
-        public AuditLoggerBuilder ip(String ip) {
+        public AuditLoggerBuilder(String ip, String className) {
             this.ip = ip;
-            return this;
-        }
-
-        public AuditLoggerBuilder className(String className) {
             this.className = className;
-            return this;
         }
 
         public AuditLoggerBuilder topMenuName(String topMenuName) {
